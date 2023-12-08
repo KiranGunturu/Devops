@@ -9,3 +9,13 @@ terraform apply - to create the resources on the cloud provider like ec2
 terraform destroy - to destory or terminate what we created as part of apply command 
 AMI ID - to locate this - go to ec2 - launch instance and select anyone like macOS, ubuntu, amazon linux and that will show us an AMI 
 terraform.tfstate - Terraform maintains all the metadata like what we all created in this file.
+<<<<<<< HEAD
+=======
+input variable - provides input to the terraform
+output variable - terraform outputs
+main.tf
+    -> provider.tf
+    -> input.tf
+    -> output.tf
+    -> terraform.vars
+>>>>>>> 3a7abcb (new)
