@@ -18,4 +18,6 @@ main.tf
     -> terraform.tfvars // file to store all the variable values
         -> By default, apply command will look for this file and retreive all the variable values. if we have diff name like variables.tfvars, will have to provide this name to the apply command
 
+terraform plan -lock=false
+
 
