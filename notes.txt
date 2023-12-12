@@ -9,6 +9,9 @@ terraform apply - to create the resources on the cloud provider like ec2
 terraform destroy - to destory or terminate what we created as part of apply command 
 AMI ID - to locate this - go to ec2 - launch instance and select anyone like macOS, ubuntu, amazon linux and that will show us an AMI 
 terraform.tfstate - Terraform maintains all the metadata like what we all created in this file including any sensitive details like passwords.
+    drawbacks - anyone can access statefile and security is compramised
+to overcome these concerns - there is a concept which is remote backend - means terrafrom can create the statefile in the s3 instead local when we run apply command
+not only s3, it can either be s3, terraform cloud or azure
 input variable - provides input to the terraform
 output variable - terraform outputs
 main.tf
