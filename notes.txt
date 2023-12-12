@@ -19,5 +19,5 @@ main.tf
         -> By default, apply command will look for this file and retreive all the variable values. if we have diff name like variables.tfvars, will have to provide this name to the apply command
 
 terraform plan -lock=false
-
+git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch terraform-ec2-creation/.terraform/providers/registry.terraform.io/hashicorp/aws/5.30.0/linux_amd64/terraform-provider-aws_v5.30.0_x5' HEAD
 
