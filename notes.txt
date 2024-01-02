@@ -28,3 +28,5 @@ terraform show - command to read statefile
 
 state locking - terraform will lock the project to avoid multiple people working on same project at the same time. we can implement this using dynamoDB table.
     so we are basically logging the info in dynamoDB like who is holding the lock currently
+
+ssh-keygen -t rsa = this will generate the public key file
