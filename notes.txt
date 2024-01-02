@@ -30,3 +30,4 @@ state locking - terraform will lock the project to avoid multiple people working
     so we are basically logging the info in dynamoDB like who is holding the lock currently
 
 ssh-keygen -t rsa = this will generate the public key file
+sudo ps -ef | grep python = to check if there is any python process running
