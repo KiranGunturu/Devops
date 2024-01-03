@@ -20,6 +20,7 @@ main.tf
     -> output.tf
     -> terraform.tfvars // file to store all the variable values
         -> By default, apply command will look for this file and retreive all the variable values. if we have diff name like variables.tfvars, will have to provide this name to the apply command
+        -> terraform apply -var-file=stage.tfvars
 
 terraform plan -lock=false
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch terraform-ec2-creation/.terraform/providers/registry.terraform.io/hashicorp/aws/5.30.0/linux_amd64/terraform-provider-aws_v5.30.0_x5' HEAD
@@ -38,4 +39,54 @@ there are threee types provisioners -
 file - to move a file from local to ec2 instance
 remote-exec - connect and execute commands on ec2 instance like install and update packages and run the python apps
 local-exec - copy the terraform output to file (example : output of terraform apply command)
+
+workspaces - if we have one main.tf to create ec2 and s3 instances and we want to create these in dev, stage and prod.
+if we use dev.tfvars, stage.tfvars and prod.tfvars, its gonna overwrite the underlined state file.
+that means, if we run stage.tfvars either it may delete or modify the resources that were created in dev
+so thats why it is better to use workspaces.
+
+how to create a workspace : terraform workspace new dev
+KiranGunturu ➜ /workspaces/Devops/terraform-workspaces (main) $ tree
+.
+├── main.tf
+├── modules
+│   └── ec2-instance
+│       └── main.tf
+├── terraform.tfstate.d
+│   ├── dev
+│   ├── prod
+│   └── stage
+
+help= terraform workspace -h
+switch workspace - terraform workspace select dev
+to see what workspace we are in - terraform workspace show
+
+keep terraform.tfvars at the main directory
+switch to the workspace like to dev/stage/prod
+then run the terraform apply command
+if we run the apply command in the dev workspace, its gonna create the state file in the dev workspace itself and not in the main directory
+so this is how we are not touching the dev resources when we want to create the diff ones for stage as we will switch to stage workspace and run apply command
+
+or instead keeping just one terraform.tfvars at the main directory and keep editing whenwver we change the workspace, we can create multiple tfvars files and pass the file name to apply command
+example:
+be in the main directory and keep diff tfvars files there itself
+terraform workspace select dev
+terraform apply -var-file=dev.tfvars
+
+or 
+
+terraform workspace select stage
+terraform apply -var-file=stage.tfvars
+
+or
+
+terraform workspace select prod
+terraform apply -var-file=prod.tfvars
+
+there is an other approach. refer to main.tf file in workspace folder
+
+
+
+
+
 
