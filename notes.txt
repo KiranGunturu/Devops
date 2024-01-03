@@ -31,3 +31,11 @@ state locking - terraform will lock the project to avoid multiple people working
 
 ssh-keygen -t rsa = this will generate the public key file
 sudo ps -ef | grep python = to check if there is any python process running
+
+provisioners - it is a concept in terraform that are used to execute commands during creation and distruction of cloud resources
+problem without provisioners - lets say if we are creating 10 ec2 instances and we want to install python on all of them, we should manually connect and run shell script to install pip commands
+there are threee types provisioners - 
+file - to move a file from local to ec2 instance
+remote-exec - connect and execute commands on ec2 instance like install and update packages and run the python apps
+local-exec - copy the terraform output to file (example : output of terraform apply command)
+
