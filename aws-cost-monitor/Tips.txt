@@ -1,0 +1,65 @@
+#5 Right Sizing
+===============
+goal of right sizing is to elimiate waste by using right size of infrastructure that will minimize the cost while at the sametime 
+not compramizing the application performance.
+
+	ec2 - instance type
+	===================
+	we should look at the cpu, memory and network utilization of instances
+	we should generally keep our avg utilization at about 80%.
+	if our utilization across any of these metrics are low, it may indicates that it is time to drop down the instance type and select most suitable instance class for our application
+
+	s3 - storage class
+	==================
+
+	we have different storage classes like General purpose, IA, Glacier
+	each of these storage classes offer different availability, durabilty, performance and cost
+	right sizing in this case depends on app neeed and way we access the data.
+	ex: general purpose is suitable for freqently access data that require high levels of durabilty and low and relaiable latency
+	glacier on the other hand is the fraction of the cost. best suited of archicing use cases.
+
+	tip is that: pick the option that minimizes the cost and allow enough application head room to function.
+
+#4 Ingress and egress
+=====================
+ingress and egress refers to data transfes across network boundaries
+this can be the data moving across internal networks or moving over the public internet
+In aws, charges can be applied when data across certain network boundaries
+tip: either we should avoid or factor them into the budget
+
+	ex between aws and public internet
+	for uploading to aws, no charges will be applied
+	for moving data out of aws over the internet, there will be charges
+	chares may vary depends on what aws resource are we using.
+
+	ex 1: from s3 to local machine using internet, 9cents per gb for the first 10Tb
+	if we have 1TB, charge is around $90 for the data transfer alone
+
+	ex 2: between region to region
+	popular ones - us-east-1, us-west-2 and eu-west-1
+	data replication across multiple regions and moving when we want it.
+
+	ex 3: between different AZs but within the same region
+	1cents per gb in each direction
+
+#3 Make use of retention policies
+=================================
+
+especially cloudwatch logs - 50 cents per gb
+any high throughput applications can add more logs in the cloudwatch.
+use data migrarion polices to move the log groups to glacier or general purpose
+
+#2 use aws pricing calculator
+=============================
+
+https://calculator.aws/#/estimate
+
+100gb per month - $2.30
+
+#1 Design with cost in mind
+============================
+
+estimate the cost while designing the app
+
+
+
