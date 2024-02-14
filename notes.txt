@@ -23,8 +23,9 @@ main.tf
         -> terraform apply -var-file=stage.tfvars
 
 terraform plan -lock=false
+delete hidden large files using below. run the command at the root. use force if the backup already exists.
 git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch terraform-ec2-creation/.terraform/providers/registry.terraform.io/hashicorp/aws/5.30.0/linux_amd64/terraform-provider-aws_v5.30.0_x5' HEAD
-git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch create-sns-and-subscribe/.terraform/providers/registry.terraform.io/hashicorp/aws/5.36.0/linux_amd64/terraform-provider-aws_v5.36.0_x5' HEAD 
+git filter-branch --index-filter 'git rm -r --cached --ignore-unmatch create-sns-and-subscribe/.terraform/providers/registry.terraform.io/hashicorp/aws/5.36.0/linux_amd64/terraform-provider-aws_v5.36.0_x5' -f HEAD 
 terraform show - command to read statefile
 
 state locking - terraform will lock the project to avoid multiple people working on same project at the same time. we can implement this using dynamoDB table.
